@@ -1,3 +1,5 @@
+/*jshint browser: true, esversion: 6 */
+
 //use destructuring on the json somehow, so it's less annoying to parse
 //handle 200, 400, and 500 codes using promises (then -- which I still don't understand)
 //use a mouseover event to make a caption appear
@@ -10,8 +12,13 @@ var photos = null;
 
 document.getElementById('search').addEventListener('click', function() {
   console.log('you clicked search');
-    let keyword = document.getElementById('keyword').value;
-    searchPhotos(keyword);
+    if (document.getElementById('keyword').value.length > 1) {
+        var keyword = document.getElementById('keyword').value;
+        console.log(`the button says the keyword is ${keyword}`);
+        searchPhotos(keyword);
+    } else {
+        searchPhotos();
+    }
 });
 
 function listThumbnails() {
@@ -32,7 +39,8 @@ function clearPrevious() {
     }
 }
 
-function searchPhotos(keyword) {
+function searchPhotos(keyword = 'mars') {
+    console.log(keyword);
   fetch(`https://images-api.nasa.gov/search?q=${keyword}`)
     .then(function(response) {
       return response.json();
@@ -47,7 +55,7 @@ function searchPhotos(keyword) {
     
       clearPrevious();
       listThumbnails();
-  })
+  });
     /*
     .then(function(j) {
       response = j;
