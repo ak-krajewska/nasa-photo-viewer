@@ -32,7 +32,11 @@ function listThumbnails(keyword) {
             document.getElementById('list').appendChild(li);
        }
   });
-    document.getElementById('loading').innerHTML = `Results for ${keyword}`;
+    if (photos.length === 0) { //results are 0 
+        document.getElementById('loading').innerHTML = `Sorry, no images found for ${keyword}`; 
+    } else {
+        document.getElementById('loading').innerHTML = `Results for ${keyword}`;
+    }
 }
 
 function clearPrevious() {
