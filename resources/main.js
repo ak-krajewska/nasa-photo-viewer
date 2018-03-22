@@ -1,11 +1,12 @@
 /*jshint browser: true, esversion: 6 */
 
-//use destructuring on the json somehow, so it's less annoying to parse
+//use destructuring on the json somehow, so it's less annoying to parse --> not really sure how this is going to be useful
 //handle 200, 400, and 500 codes using promises (then -- which I still don't understand)
 //use a mouseover event to make a caption appear
-//use a default value for when the user doesn't put anything in the search box
-//use template strings to display all text on the page
 //use arrow functions
+//DONE use a default value for when the user doesn't put anything in the search box
+//DONE use template strings to display all text on the page
+//DONE show loading indicator
 
 var response = null;
 var photos = null; 
@@ -21,8 +22,9 @@ document.getElementById('search').addEventListener('click', function() {
     }
 });
 
-function listThumbnails() {
+function listThumbnails(keyword) {
     // j.collection.items[1].data[0].media_type);
+    
    photos.forEach(function(element, index) {
        if (photos[index].data[0].media_type === 'image'){
             var li = document.createElement('li');
@@ -30,6 +32,7 @@ function listThumbnails() {
             document.getElementById('list').appendChild(li);
        }
   });
+    document.getElementById('loading').innerHTML = `Results for ${keyword}`;
 }
 
 function clearPrevious() {
@@ -40,21 +43,22 @@ function clearPrevious() {
 }
 
 function searchPhotos(keyword = 'mars') {
-    console.log(keyword);
+    document.getElementById('loading').style.display = 'block';
+    //console.log(keyword);
   fetch(`https://images-api.nasa.gov/search?q=${keyword}`)
     .then(function(response) {
       return response.json();
     })
     //do some error checking
-    .then(function(r) {
-      console.log(r);
-      response = r;
+    .then(function(j) {
+      console.log(j);
+      response = j;
       photos = response.collection.items;
       console.log(photos);
       //console.log(photos[0].links[0].href);
     
       clearPrevious();
-      listThumbnails();
+      listThumbnails(keyword);
   });
     /*
     .then(function(j) {
