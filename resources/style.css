@@ -13,3 +13,7 @@ img {
 .hidden-caption {
     display: none;
 }
+
+ul {
+  list-style-type: none;
+}
