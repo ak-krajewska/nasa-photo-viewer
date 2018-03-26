@@ -28,7 +28,7 @@ function listThumbnails(keyword) {
    photos.forEach(function(element, index) {
        if (photos[index].data[0].media_type === 'image'){
             var li = document.createElement('li');
-            li.innerHTML = `<img alt="${photos[index].data[0].title}" src="${photos[index].links[0].href}">`;
+            li.innerHTML = `<img alt="${photos[index].data[0].title}" src="${photos[index].links[0].href}"><br><span>  ${photos[index].data[0].title} </span>`;
             document.getElementById('list').appendChild(li);
            
        }
