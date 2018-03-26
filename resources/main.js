@@ -33,7 +33,7 @@ function listThumbnails(keyword) {
            //use last child here
            document.getElementById('list').lastChild.id = index;
            //now add the event listener
-           document.getElementById(index).addEventListener('mouseenter', function() {
+           document.getElementById(index).firstChild.addEventListener('mouseenter', function() {
                //when you mouse enter, change the class to visible caption
                 document.getElementById(index).lastChild.className = 'caption';
            });
