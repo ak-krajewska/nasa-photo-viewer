@@ -1,7 +1,7 @@
 /*jshint browser: true, esversion: 6 */
 
 //use destructuring on the json somehow, so it's less annoying to parse --> not really sure how this is going to be useful
-//handle 200, 400, and 500 codes using promises (then -- which I still don't understand)
+//handle 200, 400, and 500 codes using promises (then -- which I still don't understand) -> doesn't then just deal with them? do I really need to do anything special?
 //use a mouseover event to make a caption appear
 //use arrow functions
 //DONE use a default value for when the user doesn't put anything in the search box
@@ -12,10 +12,10 @@ var response = null;
 var photos = null; 
 
 document.getElementById('search').addEventListener('click', function() {
-  console.log('you clicked search');
+  window.console.log('you clicked search');
     if (document.getElementById('keyword').value.length > 1) {
         var keyword = document.getElementById('keyword').value;
-        console.log(`the button says the keyword is ${keyword}`);
+        window.console.log(`the button says the keyword is ${keyword}`);
         searchPhotos(keyword);
     } else {
         searchPhotos();
@@ -28,8 +28,9 @@ function listThumbnails(keyword) {
    photos.forEach(function(element, index) {
        if (photos[index].data[0].media_type === 'image'){
             var li = document.createElement('li');
-            li.innerHTML = `<img src=${photos[index].links[0].href}>`;
+            li.innerHTML = `<img alt="${photos[index].data[0].title}" src="${photos[index].links[0].href}">`;
             document.getElementById('list').appendChild(li);
+           
        }
   });
     if (photos.length === 0) { //results are 0 
@@ -48,18 +49,18 @@ function clearPrevious() {
 
 function searchPhotos(keyword = 'mars') {
     document.getElementById('loading').style.display = 'block';
-    //console.log(keyword);
+    //window.console.log(keyword);
   fetch(`https://images-api.nasa.gov/search?q=${keyword}`)
     .then(function(response) {
       return response.json();
     })
     //do some error checking
     .then(function(j) {
-      console.log(j);
+      window.console.log(j);
       response = j;
       photos = response.collection.items;
-      console.log(photos);
-      //console.log(photos[0].links[0].href);
+      window.console.log(photos);
+      //window.console.log(photos[0].links[0].href);
     
       clearPrevious();
       listThumbnails(keyword);
@@ -84,12 +85,12 @@ fetch('https://images-api.nasa.gov/search?q=mars')
       })
 
 .then(function(j) {
-        console.log(j);
-        console.log(j.collection.items[1]);
-     console.log("title: " + j.collection.items[1].data[0].title);
-     console.log("media type: " + j.collection.items[1].data[0].media_type);
-     console.log("link to json with all the image sizes: " + j.collection.items[1].href);
-    console.log("thumbnail :" + j.collection.items[1].links[0].href);
+        window.console.log(j);
+        window.console.log(j.collection.items[1]);
+     window.console.log("title: " + j.collection.items[1].data[0].title);
+     window.console.log("media type: " + j.collection.items[1].data[0].media_type);
+     window.console.log("link to json with all the image sizes: " + j.collection.items[1].href);
+    window.console.log("thumbnail :" + j.collection.items[1].links[0].href);
 
       }); */
 

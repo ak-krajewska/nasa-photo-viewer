@@ -1,8 +1,15 @@
 img {
     width: 250px;
-    height: 250px;
 }
 
 #loading {
+    display: none;
+}
+
+.caption {
+    display: block;
+}
+
+.hidden-caption {
     display: none;
 }
