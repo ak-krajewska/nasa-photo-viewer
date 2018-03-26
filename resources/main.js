@@ -34,11 +34,11 @@ function listThumbnails(keyword) {
            document.getElementById('list').lastChild.id = index;
            //now add the event listener
            document.getElementById(index).addEventListener('mouseenter', function() {
-               //when you mouse over, change the span's class to invisible (for testing)
+               //when you mouse enter, change the class to visible caption
                 document.getElementById(index).lastChild.className = 'caption';
            });
            document.getElementById(index).addEventListener('mouseout', function() {
-               //when you mouse over, change the span's class to invisible (for testing)
+               //when the mouse leaves, change the caption class to hidden
                 document.getElementById(index).lastChild.className = 'hidden-caption';
            });
             
