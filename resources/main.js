@@ -27,10 +27,21 @@ function listThumbnails(keyword) {
     
    photos.forEach(function(element, index) {
        if (photos[index].data[0].media_type === 'image'){
-            var li = document.createElement('li');
-            li.innerHTML = `<img alt="${photos[index].data[0].title}" src="${photos[index].links[0].href}"><br><span>  ${photos[index].data[0].title} </span>`;
+           var li = document.createElement('li');
+            li.innerHTML = `<img alt="${photos[index].data[0].title}" src="${photos[index].links[0].href}"><br><span class="hidden-caption">  ${photos[index].data[0].title} </span>`;
             document.getElementById('list').appendChild(li);
-           
+           //use last child here
+           document.getElementById('list').lastChild.id = index;
+           //now add the event listener
+           document.getElementById(index).addEventListener('mouseenter', function() {
+               //when you mouse over, change the span's class to invisible (for testing)
+                document.getElementById(index).lastChild.className = 'caption';
+           });
+           document.getElementById(index).addEventListener('mouseout', function() {
+               //when you mouse over, change the span's class to invisible (for testing)
+                document.getElementById(index).lastChild.className = 'hidden-caption';
+           });
+            
        }
   });
     if (photos.length === 0) { //results are 0 
