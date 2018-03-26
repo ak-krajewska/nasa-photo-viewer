@@ -52,6 +52,10 @@ function searchPhotos(keyword = 'mars') {
     //window.console.log(keyword);
   fetch(`https://images-api.nasa.gov/search?q=${keyword}`)
     .then(function(response) {
+      window.console.log(`status is ${response.status}`);
+      if (response.status != 200){
+          document.getElementById('loading').innerHTML = `Something has gone wrong. Error ${response.status}`;
+      }
       return response.json();
     })
     //do some error checking
@@ -60,40 +64,11 @@ function searchPhotos(keyword = 'mars') {
       response = j;
       photos = response.collection.items;
       window.console.log(photos);
-      //window.console.log(photos[0].links[0].href);
+      
     
       clearPrevious();
       listThumbnails(keyword);
-  });
-    /*
-    .then(function(j) {
-      response = j;
-      assignValues();
-      getFollowers(j.followers_url);
-    })*/
-    
+  });  
 }
 
-// collection.metadata.total_hits = 0 means no results
 
-
-/*
-fetch('https://images-api.nasa.gov/search?q=mars')
-    //fetch('https://api.github.com/users/cassidoo')
-      .then(function(response) {
-        return response.json();
-      })
-
-.then(function(j) {
-        window.console.log(j);
-        window.console.log(j.collection.items[1]);
-     window.console.log("title: " + j.collection.items[1].data[0].title);
-     window.console.log("media type: " + j.collection.items[1].data[0].media_type);
-     window.console.log("link to json with all the image sizes: " + j.collection.items[1].href);
-    window.console.log("thumbnail :" + j.collection.items[1].links[0].href);
-
-      }); */
-
-//you'll have to check if the media type is image
-//might need to limit the search results OR do pagination somehow
-//you probably want to pull in the entire response and store it
